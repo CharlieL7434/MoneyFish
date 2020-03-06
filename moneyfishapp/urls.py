@@ -13,15 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from moneyfishapp import views
 
+app_name = 'rango'
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.index, name= 'index'),
-    path('moneyfish/', include('moneyfishapp.urls')),
-    path('debts/', views.debts, name='debts'),
-    path('money/', views.money, name='money'),
-    path('login/', views.login, name='login'),
 ]
