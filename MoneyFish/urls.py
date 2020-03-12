@@ -20,8 +20,8 @@ from MoneyFish import views
 
 urlpatterns = [
     path('', views.index, name = 'index'),
-    path('', views.debts, name ='debts'),
-    path('', views.money, name = 'money'),
-    path('', views.login, name = 'login'),
+    path('debts/', views.debts, name ='debts'),
+    path('money/', views.money, name = 'money'),
+    path('login/', views.login, name = 'login'),
     path('admin/', admin.site.urls),
 ]
