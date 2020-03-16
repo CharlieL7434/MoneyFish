@@ -16,7 +16,11 @@ Including another URLconf
 from django.urls import path
 from moneyfishapp import views
 
-app_name = 'rango'
+app_name = 'moneyfishapp'
+
 urlpatterns = [
     path('', views.index, name= 'index'),
+    path('login/', views.login, name='login'),
+    path('debts/', views.debts, name='debts'),
+    path('money/', views.money, name='money'),
 ]
