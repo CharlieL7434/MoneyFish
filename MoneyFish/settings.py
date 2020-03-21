@@ -39,11 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'MoneyFish',
-=======
     'moneyfishapp'
->>>>>>> abdc55ef08a3eef098f33797ec4018ce4518e8af
 ]
 
 MIDDLEWARE = [
