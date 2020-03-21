@@ -2,10 +2,9 @@ from django.db import models
 
 
 class User(models.Model):
+    email = models.EmailField(max_length=254,unique = True)
     given_name = models.CharField(max_length =128)
     family_name = models.CharField(max_length =128)
-    email = models.EmailField(max_length=254,unique = True)
-    
     def __str__(self):
         return "%s %s" (self.given_name, self.family_name)
 
@@ -29,7 +28,6 @@ class Outgoing(models.Model):
 class Loans(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     borrower = models.CharField(max_length =128)
-    lsource = insource = models.CharField(max_length =128)
     lvalue = models.DecimalField(max_digits=None, decimal_places=2)
     
     def __str__(self):
@@ -39,17 +37,17 @@ class Loans(models.Model):
 class Debts(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     lender = models.CharField(max_length =128)
-    dsource = insource = models.CharField(max_length =128)
     dvalue = models.DecimalField(max_digits=None, decimal_places=2)
     
     def __str__(self):
         return self.dsource
 
-class friends(models.Model):
+class Friends(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     given_name = models.CharField(max_length =128)
     family_name = models.CharField(max_length =128)
     email = models.EmailField(max_length=254,unique = True)
-    user = models.ManyToManyField(User)    
+    # user = models.ManyToManyField(User)    
     
     def __str__(self):
         return "%s %s" (self.given_name, self.family_name)
