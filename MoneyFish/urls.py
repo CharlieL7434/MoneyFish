@@ -14,23 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-<<<<<<< HEAD
-from django.urls import path
-from django.urls import include
-from MoneyFish import views
-
-urlpatterns = [
-    path('', views.index, name = 'index'),
-    path('debts/', views.debts, name ='debts'),
-    path('money/', views.money, name = 'money'),
-    path('login/', views.login, name = 'login'),
-=======
 from django.urls import path, include
 from moneyfishapp import views
 
 urlpatterns = [
     path('', views.index, name= 'index'),
     path('moneyfishapp/', include('moneyfishapp.urls')),
->>>>>>> abdc55ef08a3eef098f33797ec4018ce4518e8af
     path('admin/', admin.site.urls),
 ]
