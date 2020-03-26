@@ -1,0 +1,21 @@
+{% extends 'moneyfishapp/base.html' %}
+{% load static %}
+
+{% block title_block %}
+	debts
+{% endblock %}
+
+{% block body_block %}
+
+	<h1>MoneyFish</h1>
+		{% if user.is_authenticated %}
+			 {{ user.username }} : debts
+		{% endif %}
+	{% if debts %}
+		{% for loan in loans %}
+			{{ debt.lender }} : {{ debt.dvalue}}
+		{% endfor %}
+	{% else %}
+		No Debts
+	{% endif %}
+ {% endblock %}
