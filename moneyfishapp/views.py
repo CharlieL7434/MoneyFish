@@ -1,25 +1,66 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from moneyfishapp.forms import UserForm, UserProfileForm
+from moneyfishapp.forms import UserForm, UserProfileForm, LoansForm, DebtsForm, IncomeForm, OutgoingForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from moneyfishapp.models import Loans, Debts, Income, Outgoing
 
 def index(request):
 	return render(request, 'moneyfishapp/index.html')
 
 def debts(request):
-	return render(request, 'moneyfishapp/debts.html')
+
+	debt_list = Debts.objects.order_by('-dvalue')[:5]
+
+	context_dict = {}
+	context_dict['debts'] = debt_list
+
+	return render(request, 'moneyfishapp/debts.html', context=context_dict)
 
 def loans(request):
-	return render(request, 'moneyfishapp/loans.html')
+
+	loan_list = Loans.objects.order_by('-lvalue')[:5]
+
+	context_dict = {}
+	context_dict['loans'] = loan_list
+
+	return render(request, 'moneyfishapp/loans.html', context=context_dict)
 
 def friends(request):
 	return HttpResponse("This is the friends page")
 
 def money(request):
 	return render(request, 'moneyfishapp/myMoney.html')
+
+def add_loan(request):
+	form = LoansForm()
+
+	if request.method =='POST':
+		form = LoansForm(request.POST)
+
+		if form.is_valid():
+			form.save(commit=True)
+
+			return redirect('/moneyfishapp/')
+		else:
+			print(form.errors)
+	return render(request, 'moneyfishapp/add_loan.html', {'form': form})
+
+def add_debt(request):
+	form = DebtsForm()
+
+	if request.method == 'POST':
+		form = DebtsForm(request.POST)
+
+		if form.is_valid():
+			form.save(commit=True)
+
+			return redirect('/moneyfishapp/')
+		else:
+			print(form.errors)
+	return render(request, 'moneyfishapp/add_debt.html', {'form': form})
 
 def register(request):
 	registered = False

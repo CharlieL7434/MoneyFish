@@ -4,26 +4,35 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from moneyfishapp.models import User,Income,Outgoing,Loans,Debts,Friends
+from moneyfishapp.models import User, Income, Outgoing, Loans, Debts, Friends
 from random import randint
 
 def populate():
 
-    pauline_in = [{'insource':'Employment','invalue':randint(0,1000)},{'insource':'Student loan','invalue':randint(0,6000)}]
-    pauline_out = [{'outsource':'rent','outvalue':randint(0,1000)},{'outsource':'utill','outvalue':randint(0,1000)}]
-    pauline_loan = [{'borrower':'jane doe','lvalue':randint(0,1000)},{'borrower':'john smith','lvalue':randint(0,1000)}]
-    pauline_debts =[{'lender':'leon crooks','dvalue':randint(0,1000)},]
+    pauline_in = [
+        {'insource':'Employment','invalue': 300.00},
+        {'insource':'Student loan','invalue': 600.00}]
+
+    pauline_out = [
+        {'outsource':'rent','outvalue':randint(0,1000)},
+        {'outsource':'utill','outvalue':randint(0,1000)}]
+
+    pauline_loan = [
+        {'borrower':'jane doe','lvalue':randint(0,1000)},
+        {'borrower':'john smith','lvalue':randint(0,1000)}]
+
+    pauline_debts =[{'lender':'leon crooks','dvalue':randint(0,1000)}]
+
     pauline_friends = [{'email':'LeonDCrooks@teleworm.us ','given_name':'leon','family_name':'crooks'},{'email':'janedoe@teleworm.us ','given_name':'jane','family_name':'doe'} ]
 
-    user = {'PaulineGOlson@armyspy.com' :{'given_name':'Pauline', 'family_name':'Olson', 'income':pauline_in, 'outgoing':pauline_out,
-    'loans':pauline_loan, 'debts':pauline_debts, 'friends':pauline_friends }}
+    user = {'PaulineGOlson@armyspy.com' :{'given_name':'Pauline', 'family_name':'Olson', 'income':pauline_in, 'outgoing':pauline_out, 'loans':pauline_loan, 'debts':pauline_debts,'friends':pauline_friends},}
 
     for user,user_data in user.items():
         u = add_user(user,user_data['given_name'],user_data['family_name'])
         for i in user_data['income']:
             add_income(u,i['insource'],i['invalue'])
         for o in user_data['outgoing']:
-            add_outgoing(u,o['oursource'],o['outvalue'])
+            add_outgoing(u,o['outsource'],o['outvalue'])
         for l in user_data['loans']:
             add_loans(u,l['borrower'],l['lvalue'])
         for d in user_data['debts']:
@@ -63,7 +72,7 @@ def add_loans(user, source, value):
 
 def add_debts(user, source, value):
     d = Debts.objects.get_or_create(user=user,lender=source)[0]
-    d.invalue = value
+    d.dvalue = value
     d.save()
     return d
 

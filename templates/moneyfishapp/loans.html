@@ -12,11 +12,18 @@
         {{ user.username }} : Loans
     {% endif %}
 
+    <div>
     {% if loans %}
+        <ul>
         {% for loan in loans %}
-            {{ loan.borrower }} : {{ loan.lvalue }}
+            <li>{{ loan.borrower }} : {{ loan.lvalue }}</li>
+            <br />
         {% endfor %}
+        </ul>
     {% else %}
-        No Loans
+        <strong>No Loans</strong>
     {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_loan/">Add a New Loan</a><br />
 {% endblock %}

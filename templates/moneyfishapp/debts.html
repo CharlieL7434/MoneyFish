@@ -12,13 +12,20 @@
         {{ user.username }} : debts
     {% endif %}
 
+    <div>
     {% if debts %}
+        <ul>
         {% for debt in debts %}
-            {{ debt.lender }} : {{ debt.dvalue }}
+            <li>{{ debt.lender }} : {{ debt.dvalue }}</li>
+            <br />
         {% endfor %}
+        </ul>
     {% else %}
         No Debts
     {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_debt/">Add a New Debt</a><br />
 {% endblock %}
 
 
