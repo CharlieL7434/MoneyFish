@@ -1,0 +1,62 @@
+<!DOCTYPE hmtl>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #c7f0db;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: black;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #add8e6;
+        }
+        </style>
+            <title>
+                {% block title_block %}
+
+                {%endblock %}
+            </title>
+    </head>
+    <boody>
+        <header>
+            <nav>
+                <div>
+                    <ul>
+                        <li><a href="/moneyfishapp/">Homepage</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="/moneyfishapp/money">MyMoney</a></li>
+                        <li><a href="/moneyfishapp/debts">Debts</a></li>
+                        <li><a href="/moneyfishapp/loans">Loans</a></li>
+                        <li><a href="/moneyfishapp/logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="/moneyfishapp/register">Register</a></li>
+                        <li><a href="/moneyfishapp/login">Login</a></li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div>
+            {% block body_block %}
+
+            {% endblock %}
+        </div>
+    </boody>
+</html>
