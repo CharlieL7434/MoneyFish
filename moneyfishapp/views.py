@@ -21,6 +21,8 @@ def friends(request):
 def money(request):
 	return render(request, 'moneyfishapp/myMoney.html')
 
+
+
 def register(request):
 	registered = False
 
