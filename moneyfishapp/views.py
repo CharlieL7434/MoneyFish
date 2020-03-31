@@ -32,7 +32,14 @@ def friends(request):
 	return HttpResponse("This is the friends page")
 
 def money(request):
-	return render(request, 'moneyfishapp/myMoney.html')
+	income_list = Income.objects.order_by('-invalue')[:5]
+	outgoing_list = Outgoing.objects.order_by('outvalue')[:5]
+
+	context_dict = {}
+	context_dict['income'] = income_list
+	context_dict['outgoing'] = outgoing_list
+
+	return render(request, 'moneyfishapp/myMoney.html', context=context_dict)
 
 def add_loan(request):
 	form = LoansForm()
@@ -61,6 +68,36 @@ def add_debt(request):
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_debt.html', {'form': form})
+
+def add_income(request):
+	form = IncomeForm()
+
+	if request.method == 'POST':
+		form = IncomeForm(request.POST)
+
+		if form.is_valid():
+			form.save(commit=True)
+
+			return redirect('/moneyfishapp/')
+		else:
+			print(form.errors)
+	return render(request, 'moneyfishapp/add_income.html', {'form': form})
+
+
+def add_outgoing(request):
+	form = OutgoingForm()
+
+	if request.method == 'POST':
+		form = OutgoingForm(request.POST)
+
+		if form.is_valid():
+			form.save(commit=True)
+
+			return redirect('/moneyfishapp/')
+		else:
+			print(form.errors)
+	return render(request, 'moneyfishapp/add_outgoing.html', {'form': form})
+	
 
 def register(request):
 	registered = False

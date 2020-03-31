@@ -29,4 +29,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('add_loan/', views.add_loan, name='add_loan'),
     path('add_debt/', views.add_debt, name='add_debt'),
+    path('add_income/', views.add_income, name='add_income'),
+    path('add_outgoing/', views.add_outgoing, name='add_outgoing'),
 ]
