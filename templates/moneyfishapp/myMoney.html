@@ -5,34 +5,62 @@
     MyMoney
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoMoney.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
 {% block body_block %}
-    <h1>MoneyFish</h1>
+
+<br />
+
+
 
     {% if user.is_authenticated %}
         {{ user.username }} : Total Money
     {% endif %}
+    <br />
 
     <div>
         Money In:
-
-        {% if Income %}
-            {% for income in Income %}
-                {{ income.insource}} : {{ income.invalue }}
+        <br />
+        {% if income %}
+            <ul>
+            {% for in in income %}
+                <li>{{ in.insource}} : {{ in.invalue }}</li>
+                <br />
             {% endfor %}
+            </ul>
         {% else %}
-            No Income.
+            <strong>No Income.</strong>
         {% endif %}
     </div>
-
+    <br />
+    <a href="/moneyfishapp/add_income/">Add a New Income</a><br />
     <div>
         Money Out:
-
-        {% if Outgoing %}
-            {% for out in Outgoing %}
-                {{ out.outsource }} : {{ out.outvalue }}
+        <br />
+        {% if outgoing %}
+            <ul>
+            {% for out in outgoing %}
+                <li>{{ out.outsource }} : {{ out.outvalue }}</li>
+                <br />
             {% endfor %}
+            </ul>
         {% else %}
-            No Outgoing.
+            <strong>No Outgoing.</strong>
         {% endif %}
     </div>
+    <br />
+    <a href="/moneyfishapp/add_outgoing/">Add New Outgoing</a><br />
 {% endblock %}

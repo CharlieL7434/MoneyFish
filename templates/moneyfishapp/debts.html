@@ -5,20 +5,42 @@
     Debts
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoDebts.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
 {% block body_block %}
-    <h1>MoneyFish</h1>
+
 
     {% if user.is_authenticated %}
-        {{ user.username }} : debts
+        {{ user.username }} : Debts
     {% endif %}
 
+    <div>
     {% if debts %}
+        <ul>
         {% for debt in debts %}
-            {{ debt.lender }} : {{ debt.dvalue }}
+            <li>{{ debt.lender }} : {{ debt.dvalue }}</li>
+            <br />
         {% endfor %}
+        </ul>
     {% else %}
         No Debts
     {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_debt/">Add a New Debt</a><br />
 {% endblock %}
 
 

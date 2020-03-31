@@ -1,0 +1,40 @@
+{% extends 'moneyfishapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Add Income
+{% endblock %}
+
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoAddIncome.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+
+<div>
+    <form id="income_form" method="post" action="/moneyfishapp/add_income/">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+            <br />
+        {% endfor %}
+        <input type="submit" name="submit" value="Add Income" />
+    </form>
+</div>
+{% endblock %}

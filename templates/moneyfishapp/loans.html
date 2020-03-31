@@ -5,18 +5,40 @@
     Loans
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoLoans.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
 {% block body_block %}
-    <h1>MoneyFish</h1>
+    
 
     {% if user.is_authenticated %}
         {{ user.username }} : Loans
     {% endif %}
 
+    <div>
     {% if loans %}
+        <ul>
         {% for loan in loans %}
-            {{ loan.borrower }} : {{ loan.lvalue }}
+            <li>{{ loan.borrower }} : {{ loan.lvalue }}</li>
+            <br />
         {% endfor %}
+        </ul>
     {% else %}
-        No Loans
+        <strong>No Loans</strong>
     {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_loan/">Add a New Loan</a><br />
 {% endblock %}

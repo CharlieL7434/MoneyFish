@@ -5,8 +5,22 @@
     Login
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoLogin.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
 {% block body_block %}
-<h1>Login to MoneyFish</h1>
 <form id="login_form" method="post" action="/moneyfishapp/login/">
     {% csrf_token %}
     Username: <input type="text" name="username" value="" size="50" />
