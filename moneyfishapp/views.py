@@ -39,6 +39,7 @@ def money(request):
 	context_dict['income'] = income_list
 	context_dict['outgoing'] = outgoing_list
 
+
 	return render(request, 'moneyfishapp/myMoney.html', context=context_dict)
 
 def add_loan(request):

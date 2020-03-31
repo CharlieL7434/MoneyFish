@@ -12,15 +12,15 @@ class LoansForm(forms.ModelForm):
 
 class IncomeForm(forms.ModelForm):
     insource = forms.CharField(max_length=128, help_text="Please enter your income source.")
-    invalue = forms.DecimalField(max_digits=8, decimal_places=2)
+    invalue = forms.DecimalField(max_digits=8, decimal_places=2, help_text="Please enter the income amount")
 
     class Meta:
         model = Income
         fields = ('insource', 'invalue',)
 
 class OutgoingForm(forms.ModelForm):
-    outsource = forms.CharField(max_length=128, help_text="Please enter your income source.")
-    outvalue = forms.DecimalField(max_digits=8, decimal_places=2)
+    outsource = forms.CharField(max_length=128, help_text="Please enter your outgoing source.")
+    outvalue = forms.DecimalField(max_digits=8, decimal_places=2, help_text="Please enter outgoing amount")
 
     class Meta:
         model = Outgoing
@@ -28,7 +28,7 @@ class OutgoingForm(forms.ModelForm):
 
 class DebtsForm(forms.ModelForm):
     lender = forms.CharField(max_length=128, help_text="Please enter your debt source.")
-    dvalue = forms.DecimalField(max_digits=8, decimal_places=2)
+    dvalue = forms.DecimalField(max_digits=8, decimal_places=2, help_text="Please debt amount")
 
     class Meta:
         model = Debts
