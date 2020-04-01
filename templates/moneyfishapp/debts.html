@@ -5,8 +5,22 @@
     Debts
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoDebts.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+{% endblock %}
+
 {% block body_block %}
-    <h1>MoneyFish - Debts</h1>
+    <br />
 
     {% if user.is_authenticated %}
         {{ user.username }} : Debts
@@ -14,6 +28,7 @@
 
     <div>
     {% if debts %}
+        <br />
         <ul>
         {% for debt in debts %}
             <li>{{ debt.lender }} : {{ debt.dvalue }}</li>

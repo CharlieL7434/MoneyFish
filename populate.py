@@ -4,7 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from moneyfishapp.models import User, Income, Outgoing, Loans, Debts, Friends
+from moneyfishapp.models import User, Income, Outgoing, Loans, Debts
 from random import randint
 
 def populate():
@@ -23,12 +23,12 @@ def populate():
 
     pauline_debts =[{'lender':'leon crooks','dvalue':randint(0,1000)}]
 
-    pauline_friends = [{'email':'LeonDCrooks@teleworm.us ','given_name':'leon','family_name':'crooks'},{'email':'janedoe@teleworm.us ','given_name':'jane','family_name':'doe'} ]
+    #pauline_friends = [{'email':'LeonDCrooks@teleworm.us ','given_name':'leon','family_name':'crooks'},{'email':'janedoe@teleworm.us ','given_name':'jane','family_name':'doe'} ]
 
-    user = {'PaulineGOlson@armyspy.com' :{'given_name':'Pauline', 'family_name':'Olson', 'income':pauline_in, 'outgoing':pauline_out, 'loans':pauline_loan, 'debts':pauline_debts,'friends':pauline_friends},}
+    user = {'PaulineGOlson@armyspy.com' :{'username': 'pauline1', 'first_name':'Pauline', 'last_name':'Olson', 'income':pauline_in, 'outgoing':pauline_out, 'loans':pauline_loan, 'debts':pauline_debts},}#'friends':pauline_friends},}
 
     for user,user_data in user.items():
-        u = add_user(user,user_data['given_name'],user_data['family_name'])
+        u = add_user(user,user_data['first_name'],user_data['last_name'], user_data['username'])
         for i in user_data['income']:
             add_income(u,i['insource'],i['invalue'])
         for o in user_data['outgoing']:
@@ -37,8 +37,8 @@ def populate():
             add_loans(u,l['borrower'],l['lvalue'])
         for d in user_data['debts']:
             add_debts(u,d['lender'],d['dvalue'])
-        for f in user_data['friends']:
-            add_friends(u,f['email'],f['given_name'],f['family_name'])
+        #for f in user_data['friends']:
+         #   add_friends(u,f['email'],f['given_name'],f['family_name'])
 
     for u in User.objects.all():
         for i in Income.objects.filter(user=u):
@@ -49,8 +49,8 @@ def populate():
             print(f'-{u}: {i}')
         for d in Debts.objects.filter(user=u):
             print(f'-{u}: {i}')
-        for f in Friends.objects.filter(user=u):
-            print(f'-{u}: {i}')
+        #for f in Friends.objects.filter(user=u):
+         #   print(f'-{u}: {i}')
 
 def add_income(user, source, value):
     i = Income.objects.get_or_create(user=user,insource=source)[0]
@@ -76,17 +76,17 @@ def add_debts(user, source, value):
     d.save()
     return d
 
-def add_friends(user ,email, gname, fname):
-    f = Friends.objects.get_or_create(user=user,email = email)[0]
-    f.given_name = gname
-    f.family_name = fname
-    f.save()
-    return f
+#def add_friends(user ,email, gname, fname):
+    #f = Friends.objects.get_or_create(user=user,email=email)[0]
+    #f.given_name = gname
+    #f.family_name = fname
+    #f.save()
+    #return f
 
-def add_user(email, gname, fname):
-    u = User.objects.get_or_create(email=email)[0]
-    u.given_name = gname 
-    u.family_name = fname
+def add_user(email, first_name, last_name, username):
+    u = User.objects.get_or_create(username=username, first_name=first_name, last_name=last_name, email=email)[0]
+    #u.first_name = gname 
+    #u.last_name = fname
     u.save()
     return u
 

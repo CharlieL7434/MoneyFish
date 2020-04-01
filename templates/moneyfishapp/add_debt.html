@@ -5,8 +5,22 @@
     Add Debt
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoAddDebt.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+{% endblock %}
+
 {% block body_block %}
-<h1>Add a Debt</h1>
+<h1>Please add you new debt here!</h1>
 <div>
     <form id="debt_form" method="post" action="/moneyfishapp/add_debt/">
         {% csrf_token %}

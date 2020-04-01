@@ -5,8 +5,23 @@
     Add Income
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoAddIncome.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+{% endblock %}
+
+
 {% block body_block %}
-<h1>Add Income</h1>
+<h1>Please add your income amount here!</h1>
 <div>
     <form id="income_form" method="post" action="/moneyfishapp/add_income/">
         {% csrf_token %}
