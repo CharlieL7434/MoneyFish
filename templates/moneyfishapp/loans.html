@@ -1,0 +1,29 @@
+{% extends 'moneyfishapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Loans
+{% endblock %}
+
+{% block body_block %}
+    <h1>MoneyFish - Loans</h1>
+
+    {% if user.is_authenticated %}
+        {{ user.username }} : Loans
+    {% endif %}
+
+    <div>
+    {% if loans %}
+        <ul>
+        {% for loan in loans %}
+            <li>{{ loan.borrower }} : {{ loan.lvalue }}</li>
+            <br />
+        {% endfor %}
+        </ul>
+    {% else %}
+        <strong>No Loans</strong>
+    {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_loan/">Add a New Loan</a><br />
+{% endblock %}

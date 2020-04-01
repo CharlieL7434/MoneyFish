@@ -18,10 +18,7 @@ from django.urls import path, include
 from moneyfishapp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.index, name= 'index'),
-    path('moneyfish/', include('moneyfishapp.urls')),
-    path('debts/', views.debts, name='debts'),
-    path('money/', views.money, name='money'),
-    path('login/', views.login, name='login'),
+    path('moneyfishapp/', include('moneyfishapp.urls')),
+    path('admin/', admin.site.urls),
 ]

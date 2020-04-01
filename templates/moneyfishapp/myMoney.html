@@ -1,0 +1,48 @@
+{% extends 'moneyfishapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    MyMoney
+{% endblock %}
+
+{% block body_block %}
+    <h1>MoneyFish - MyMoney</h1>
+
+    {% if user.is_authenticated %}
+        {{ user.username }} : Total Money
+    {% endif %}
+    <br />
+
+    <div>
+        Money In:
+        <br />
+        {% if income %}
+            <ul>
+            {% for in in income %}
+                <li>{{ in.insource}} : {{ in.invalue }}</li>
+                <br />
+            {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No Income.</strong>
+        {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_income/">Add a New Income</a><br />
+    <div>
+        Money Out:
+        <br />
+        {% if outgoing %}
+            <ul>
+            {% for out in outgoing %}
+                <li>{{ out.outsource }} : {{ out.outvalue }}</li>
+                <br />
+            {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No Outgoing.</strong>
+        {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_outgoing/">Add New Outgoing</a><br />
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'moneyfishapp/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+    Homepage
+{% endblock %}
+
+
+{% block body_block %}
+    <h1>MoneyFish</h1>
+
+    {% if user.is_authenticated %}
+        Welcome {{ user.username }}
+    {% else %}
+        Welcome
+    {% endif %}
+
+{% endblock %}
