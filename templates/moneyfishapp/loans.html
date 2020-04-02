@@ -20,18 +20,29 @@
 {% endblock %}
 
 {% block body_block %}
+
+<script>
+    var y = 0
+</script>
+
 <br />
 
     {% if user.is_authenticated %}
         {{ user.username }} : Loans
     {% endif %}
 
+    <p id="loans"></p>
+
     <div>
     {% if loans %}
-        <br />
         <ul>
         {% for loan in loans %}
             <li>{{ loan.borrower }} : {{ loan.lvalue }}</li>
+            <script>
+                var y = y + {{ loan.lvalue }}
+                var total = y
+                document.getElementById("loans").innerHTML="Your total loaned money is: £" + total;
+            </script>
             <br />
         {% endfor %}
         </ul>
