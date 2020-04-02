@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from moneyfishapp.models import Loans, Debts, Income, Outgoing
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
 
 def index(request):
 	return render(request, 'moneyfishapp/index.html')
@@ -51,10 +53,12 @@ def add_loan(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/loans/')
+			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_loan.html', {'form': form})
+
+
 
 def add_debt(request):
 	form = DebtsForm()
@@ -65,10 +69,12 @@ def add_debt(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/debts/')
+			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_debt.html', {'form': form})
+
+	
 
 def add_income(request):
 	form = IncomeForm()
@@ -79,7 +85,7 @@ def add_income(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/money/')
+			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_income.html', {'form': form})
@@ -94,7 +100,7 @@ def add_outgoing(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/money/')
+			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_outgoing.html', {'form': form})
@@ -133,9 +139,9 @@ def register(request):
 
 def user_login(request):
 	if request.method == 'POST':
+
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-
 		user = authenticate(username=username, password=password)
 
 		if user:

@@ -17,11 +17,10 @@
         margin-bottom: 8px;
   }
 </style>
-
 {% endblock %}
 
 {% block body_block %}
-
+<h1>Please add you new debt here!</h1>
 <div>
     <form id="debt_form" method="post" action="/moneyfishapp/add_debt/">
         {% csrf_token %}

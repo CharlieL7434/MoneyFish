@@ -17,10 +17,11 @@
         margin-bottom: 8px;
   }
 </style>
-
 {% endblock %}
 
 {% block body_block %}
+<h1>Login to MoneyFish!</h1>
+<div>
 <form id="login_form" method="post" action="/moneyfishapp/login/">
     {% csrf_token %}
     Username: <input type="text" name="username" value="" size="50" />
@@ -29,4 +30,5 @@
     <br />
     <input type="submit" value="submit" />
 </form>
+</div>
 {% endblock %}

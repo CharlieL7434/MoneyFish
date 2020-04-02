@@ -4,7 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from MoneyFish.moneyfishapp.models import User,Income,Outgoing,Loans,Debts,Friends
+from moneyfishapp.models import User,Income,Outgoing,Loans,Debts,Friends
 from random import randint
 
 def populate():
@@ -15,15 +15,15 @@ def populate():
     pauline_debts =[{'lender':'leon crooks','dvalue':randint(0,1000)},]
     pauline_friends = [{'email':'LeonDCrooks@teleworm.us ','given_name':'leon','family_name':'crooks'},{'email':'janedoe@teleworm.us ','given_name':'jane','family_name':'doe'} ]
 
-    user = {'PaulineGOlson@armyspy.com' :{'given_name':'Pauline', 'family_name':'Olson', 'income':pauline_in, 'outgoing':pauline_out,
+    user = { 'PGOlsen':{'email_address':'PaulineGOlson@armyspy.com','first_name':'Pauline', 'last_name':'Olson', 'income':pauline_in, 'outgoing':pauline_out,
     'loans':pauline_loan, 'debts':pauline_debts, 'friends':pauline_friends }}
 
     for user,user_data in user.items():
-        u = add_user(user,user_data['given_name'],user_data['family_name'])
+        u = add_user(user,user_data['email_address'],user_data['first_name'],user_data['last_name'])
         for i in user_data['income']:
             add_income(u,i['insource'],i['invalue'])
         for o in user_data['outgoing']:
-            add_outgoing(u,o['oursource'],o['outvalue'])
+            add_outgoing(u,o['outsource'],o['outvalue'])
         for l in user_data['loans']:
             add_loans(u,l['borrower'],l['lvalue'])
         for d in user_data['debts']:
@@ -67,17 +67,19 @@ def add_debts(user, source, value):
     d.save()
     return d
 
-def add_friends(user ,email, gname, fname):
-    f = Friends.objects.get_or_create(user=user,email = email)[0]
-    f.given_name = gname
-    f.family_name = fname
+def add_friends(user ,email, fname, lname):
+    f = Friends.objects.get_or_create(user=user)[0]
+    f.email = email
+    f.first_name = fname
+    f.last_name = lname
     f.save()
     return f
 
-def add_user(email, gname, fname):
-    u = User.objects.get_or_create(email=email)[0]
-    u.given_name = gname 
-    u.family_name = fname
+def add_user(user, email, fname, lname):
+    u = User.objects.get_or_create(username=user)[0]
+    u.email = email
+    u.first_name = fname 
+    u.last_name = lname
     u.save()
     return u
 

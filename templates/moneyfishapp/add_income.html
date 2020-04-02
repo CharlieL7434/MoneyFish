@@ -17,11 +17,11 @@
         margin-bottom: 8px;
   }
 </style>
-
 {% endblock %}
 
-{% block body_block %}
 
+{% block body_block %}
+<h1>Please add your income amount here!</h1>
 <div>
     <form id="income_form" method="post" action="/moneyfishapp/add_income/">
         {% csrf_token %}

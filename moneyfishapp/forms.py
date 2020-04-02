@@ -36,11 +36,13 @@ class DebtsForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
+    #first_name = forms.CharField(max_length=128, help_text="Please enter your first name.")
+    #surname = forms.CharField(max_length=128, help_text="Please enter your given surname.")
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password',)
+        fields = ('first_name', 'last_name','username', 'email', 'password',)
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
