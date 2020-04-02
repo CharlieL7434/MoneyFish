@@ -1,55 +1,71 @@
-<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE hmtl>
+{% load staticfiles %}
 
 <html>
-	<head>
-	<style>
-	ul {
-	  list-style-type: none;
-	  margin: 0;
-	  padding: 0;
-	  overflow: hidden;
-	  background-color: #c7f0db;
-	}
+    <head>
+        <style>
 
-	li {
-	  float: left;
-	}
+        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #c7f0db;
+        }
 
-	li a {
-	  display: block;
-	  color: black;
-	  padding: 14px 16px;
-	  text-decoration: none;
-	}
+        li {
+            float: left;
+        }
 
-	li a:hover {
-	  background-color: #add8e6;
-	</style>
-		<title>
-			{% block title_block %}
+        li a {
+            display: block;
+            color: black;
+            padding: 4px 4px;
+            text-decoration: none;
+        }
 
-			{% endblock %}
-		</title>
-	</head>
-	<body>
-		<header>
-					
-					<div>
-						<ul>
-							<li><a href="/moneyfishapp/">Homepage</a>
-							<li><a href="/moneyfishapp/login">Login</a>
-							<li><a href="/moneyfishapp/debts">Debts</a>
-							<li><a href="/moneyfishapp/loans">Loans</a>
-							<li><a href="/moneyfishapp/money">MyMoney</a>
-						</ul>
-					</div>
-				</nav>
-			</header>
-		<div>
-		{% block body_block %}
-		{% endblock %}
-		</div>
-		<hr />
-	</body>
+        li a:hover {
+            background-color: #add8e6;
+        }
+
+        body {
+             background-image: url("/static/images/MFI2.png");
+             background-repeat: repeat;
+             }
+        </style>
+            <title>
+                {% block title_block %}
+
+                {%endblock %}
+            </title>
+    </head>
+    <body>
+        <header>
+            {% block header_block %}
+            {% endblock %}
+            <nav>
+                <div>
+                    <ul>
+                        <li><a href="/moneyfishapp/">Homepage</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="/moneyfishapp/money">MyMoney</a></li>
+                        <li><a href="/moneyfishapp/debts">Debts</a></li>
+                        <li><a href="/moneyfishapp/loans">Loans</a></li>
+                        <li><a href="/moneyfishapp/logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="/moneyfishapp/register">Register</a></li>
+                        <li><a href="/moneyfishapp/login">Login</a></li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div>
+            {% block body_block %}
+
+            {% endblock %}
+        </div>
+    </body>
 </html>

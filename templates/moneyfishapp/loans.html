@@ -1,21 +1,54 @@
 {% extends 'moneyfishapp/base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block title_block %}
-	Loans
+    Loans
+{% endblock %}
+
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoLoans.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+<script>
+	var y = 0
+</script>
+
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
 {% endblock %}
 
 {% block body_block %}
+    
+		<p id="loans"></p>
+    {% if user.is_authenticated %}
+        {{ user.username }} : Loans
+    {% endif %}
 
-	<h1>MoneyFish</h1>
-		{% if user.is_authenticated %}
-			 {{ user.username }} : Loans
-		{% endif %}
-	{% if loans %}
-		{% for loan in loans %}
-			{{ loan.borrower }} : {{ loan.lvalue}}
-		{% endfor %}
-	{% else %}
-		No Loans
-	{% endif %}
- {% endblock %}
+    <div>
+    {% if loans %}
+        <ul>
+        {% for loan in loans %}
+            <li>{{ loan.borrower }} : {{ loan.lvalue }}</li>
+			<script>
+				var y = y + {{ loan.lvalue }}
+				var total = y
+				document.getElementById("loans").innerHTML ="Your total loaned money is: £" + total;
+			</script>
+            <br />
+        {% endfor %}
+        </ul>
+    {% else %}
+        <strong>No Loans</strong>
+    {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_loan/">Add a New Loan</a><br />
+{% endblock %}

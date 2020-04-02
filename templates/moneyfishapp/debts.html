@@ -1,21 +1,57 @@
 {% extends 'moneyfishapp/base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block title_block %}
-	debts
+    Debts
+{% endblock %}
+
+
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoDebts.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
 {% endblock %}
 
 {% block body_block %}
 
-	<h1>MoneyFish</h1>
-		{% if user.is_authenticated %}
-			 {{ user.username }} : debts
-		{% endif %}
-	{% if debts %}
-		{% for loan in loans %}
-			{{ debt.lender }} : {{ debt.dvalue}}
-		{% endfor %}
-	{% else %}
-		No Debts
-	{% endif %}
- {% endblock %}
+<script>
+	var y = 0
+</script>
+
+
+
+    {% if user.is_authenticated %}
+        {{ user.username }} : Debts
+    {% endif %}
+			<p id="debts"></p>
+    <div>
+    {% if debts %}
+        <ul>
+        {% for debt in debts %}
+            <li>{{ debt.lender }} : {{ debt.dvalue }}</li>
+			<script>
+				var y = y + {{ debt.dvalue }}
+				var total = y
+				document.getElementById("debts").innerHTML ="Your total debt is: £" + total;
+			</script>
+            <br />
+        {% endfor %}
+        </ul>
+    {% else %}
+        No Debts
+    {% endif %}
+    </div>
+    <br />
+    <a href="/moneyfishapp/add_debt/">Add a New Debt</a><br />
+{% endblock %}
+
+
