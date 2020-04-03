@@ -5,8 +5,23 @@
     Add Loan
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoAddLoan.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
 {% block body_block %}
-<h1>Add a Loan</h1>
+
 <div>
     <form id="loan_form" method="post" action="/moneyfishapp/add_loan/">
         {% csrf_token %}

@@ -5,8 +5,24 @@
     Register
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoReg.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
 {% block body_block %}
-<h1>Register for MoneyFish!</h1>
+
+<div>
 {% if registered %}
 <strong>Thank You for Registering!</strong>
 <br />
@@ -22,4 +38,5 @@
     <input type="submit" name="submit" value="Register" />
 </form>
 {% endif %}
+</div>
 {% endblock %}

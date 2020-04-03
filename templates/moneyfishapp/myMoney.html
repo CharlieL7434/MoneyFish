@@ -5,14 +5,35 @@
     MyMoney
 {% endblock %}
 
+{% block header_block %}
+<div>
+    <img src="{% static 'images/MFLogoMoney.png' %} " alt="MoneyFish logo" class="img-place" />
+</div>
+
+
+<style>
+    .img-place {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+  }
+</style>
+
+{% endblock %}
+
 {% block body_block %}
-    <h1>MoneyFish - MyMoney</h1>
+<br />
+	
 
     {% if user.is_authenticated %}
         {{ user.username }} : Total Money
     {% endif %}
     <br />
-
+	
+	<script>
+	var x = 0
+	var y = 0
+	</script>
+	<p id="income"></p>
     <div>
         Money In:
         <br />
@@ -20,6 +41,10 @@
             <ul>
             {% for in in income %}
                 <li>{{ in.insource}} : {{ in.invalue }}</li>
+				<script>
+				var x = x + {{ in.invalue }}
+				</script>
+				
                 <br />
             {% endfor %}
             </ul>
@@ -30,12 +55,19 @@
     <br />
     <a href="/moneyfishapp/add_income/">Add a New Income</a><br />
     <div>
+	
+	<p id="out"></p>
         Money Out:
         <br />
         {% if outgoing %}
             <ul>
             {% for out in outgoing %}
                 <li>{{ out.outsource }} : {{ out.outvalue }}</li>
+				<script>
+				var y = y + {{ out.outvalue }}
+				var total = x -y
+				document.getElementById("income").innerHTML ="Your total money is: £ " + total;
+				</script>
                 <br />
             {% endfor %}
             </ul>
@@ -43,6 +75,8 @@
             <strong>No Outgoing.</strong>
         {% endif %}
     </div>
+	
     <br />
     <a href="/moneyfishapp/add_outgoing/">Add New Outgoing</a><br />
+	
 {% endblock %}
