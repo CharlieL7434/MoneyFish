@@ -38,7 +38,6 @@
     {<script> var num = 0</script>
         <ul>
         {% for debt in debts %}
-        <li> {{debt.user.username}}, {{user.username}}</li>
             {% if debt.user.username == user.username %}
             <script> num = num +1</script>
             <li>{{ debt.lender }} : {{ debt.dvalue }}</li>
