@@ -4,3 +4,5 @@ django-registration-redux==2.2
 Pillow==7.0.0
 pytz==2019.3
 sqlparse==0.3.1
+
+When running this app from the GitHub repo, please ensure that you migrate first before running it i.e 'python manage.py migrate' thank you for your time. 
