@@ -53,7 +53,7 @@ def add_loan(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/loans/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_loan.html', {'form': form})
@@ -69,7 +69,7 @@ def add_debt(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/debts/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_debt.html', {'form': form})
@@ -85,7 +85,7 @@ def add_income(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/money/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_income.html', {'form': form})
@@ -100,7 +100,7 @@ def add_outgoing(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/money/')
 		else:
 			print(form.errors)
 	return render(request, 'moneyfishapp/add_outgoing.html', {'form': form})
