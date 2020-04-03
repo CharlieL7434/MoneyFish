@@ -64,7 +64,7 @@ def add_loan(request, username_search):
 				loan.user = user
 				loan.save()
 
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/loans/')
 		else:
 			print(form.errors)
 	context_dict = {'form': form, 'user':user}
@@ -88,7 +88,7 @@ def add_debt(request, username_search):
 				debt = form.save(commit=False)
 				debt.user = user
 				debt.save()
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/debts/')
 		else:
 			print(form.errors)
 	context_dict = {'form': form, 'user':user}
@@ -113,7 +113,7 @@ def add_income(request, username_search):
 				income.user = user
 				income.save()
 
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/money/')
 		else:
 			print(form.errors)
 	context_dict = {'form': form, 'user':user}
@@ -139,7 +139,7 @@ def add_outgoing(request, username_search):
 				outgoing.user = user
 				outgoing.save()
 
-			return redirect('/moneyfishapp/')
+			return redirect('/moneyfishapp/money/')
 		else:
 			print(form.errors)
 	context_dict = {'form': form, 'user':user}
