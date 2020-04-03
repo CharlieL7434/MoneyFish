@@ -35,7 +35,7 @@
 			<p id="debts"></p>
     <div>
     {% if debts %}
-    {<script> var num = 0</script>
+    <script> var num = 0</script>
         <ul>
         {% for debt in debts %}
             {% if debt.user.username == user.username %}
