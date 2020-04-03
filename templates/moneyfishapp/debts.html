@@ -35,8 +35,12 @@
 			<p id="debts"></p>
     <div>
     {% if debts %}
+    {<script> var num = 0</script>
         <ul>
         {% for debt in debts %}
+        <li> {{debt.user.username}}, {{user.username}}</li>
+            {% if debt.user.username == user.username %}
+            <script> num = num +1</script>
             <li>{{ debt.lender }} : {{ debt.dvalue }}</li>
 			<script>
 				var y = y + {{ debt.dvalue }}
@@ -44,14 +48,18 @@
 				document.getElementById("debts").innerHTML ="Your total debt is: £" + total;
 			</script>
             <br />
+            {% endif %}
         {% endfor %}
+        {% if num == 0 %}
+        <strong>No Debts</strong>
+        {% endif %}
         </ul>
     {% else %}
-        No Debts
+        <strong>No Debts</strong>
     {% endif %}
     </div>
     <br />
-    <a href="/moneyfishapp/add_debt/">Add a New Debt</a><br />
+    <a href="{% url 'moneyfishapp:add_debt' user.username %}">Add a New Debt</a><br />
 {% endblock %}
 
 

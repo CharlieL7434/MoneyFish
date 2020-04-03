@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block body_block %}
-<form id="login_form" method="post" action="/moneyfishapp/login/">
+<form id="login_form" method="post" action="{% url 'moneyfishapp:login'%}">
     {% csrf_token %}
     Username: <input type="text" name="username" value="" size="50" />
     <br />

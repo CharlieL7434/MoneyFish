@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from moneyfishapp.models import Loans, Debts, Income, Outgoing
+from django.contrib.auth.models import User
+
 
 def index(request):
 	return render(request, 'moneyfishapp/index.html')
@@ -42,62 +44,106 @@ def money(request):
 
 	return render(request, 'moneyfishapp/myMoney.html', context=context_dict)
 
-def add_loan(request):
+def add_loan(request, username_search):
+	try:
+		user = User.objects.get(username= username_search)
+	except User.DoesNotExist:
+		user = None
+
+	if user is None:
+		return redirect('money/')
+
 	form = LoansForm()
 
 	if request.method =='POST':
 		form = LoansForm(request.POST)
 
 		if form.is_valid():
-			form.save(commit=True)
+			if user:
+				loan = form.save(commit=False)
+				loan.user = user
+				loan.save()
 
 			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
-	return render(request, 'moneyfishapp/add_loan.html', {'form': form})
+	context_dict = {'form': form, 'user':user}
+	return render(request, 'moneyfishapp/add_loan.html', context=context_dict)
 
-def add_debt(request):
+def add_debt(request, username_search):
+	try:
+		user = User.objects.get(username= username_search)
+	except User.DoesNotExist:
+		user = None
+
+	if user is None:
+		return redirect('money/')
 	form = DebtsForm()
 
 	if request.method == 'POST':
 		form = DebtsForm(request.POST)
 
 		if form.is_valid():
-			form.save(commit=True)
-
+			if user:
+				debt = form.save(commit=False)
+				debt.user = user
+				debt.save()
 			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
-	return render(request, 'moneyfishapp/add_debt.html', {'form': form})
+	context_dict = {'form': form, 'user':user}
+	return render(request, 'moneyfishapp/add_debt.html', context=context_dict)
 
-def add_income(request):
+def add_income(request, username_search):
+	try:
+		user = User.objects.get(username = username_search)
+	except User.DoesNotExist:
+		user = None
+
+	if user is None:
+		return redirect('money/')
 	form = IncomeForm()
 
 	if request.method == 'POST':
 		form = IncomeForm(request.POST)
 
 		if form.is_valid():
-			form.save(commit=True)
+			if user:
+				income = form.save(commit=False)
+				income.user = user
+				income.save()
 
 			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
-	return render(request, 'moneyfishapp/add_income.html', {'form': form})
+	context_dict = {'form': form, 'user':user}
+	return render(request, 'moneyfishapp/add_income.html', context = context_dict)
 
 
-def add_outgoing(request):
+def add_outgoing(request, username_search):
+	try:
+		user = User.objects.get(username= username_search)
+	except User.DoesNotExist:
+		user = None
+
+	if user is None:
+		return redirect('money/')
 	form = OutgoingForm()
 
 	if request.method == 'POST':
 		form = OutgoingForm(request.POST)
 
 		if form.is_valid():
-			form.save(commit=True)
+			if user:
+				outgoing = form.save(commit=False)
+				outgoing.user = user
+				outgoing.save()
 
 			return redirect('/moneyfishapp/')
 		else:
 			print(form.errors)
-	return render(request, 'moneyfishapp/add_outgoing.html', {'form': form})
+	context_dict = {'form': form, 'user':user}
+	return render(request, 'moneyfishapp/add_outgoing.html', context=context_dict)
 	
 
 def register(request):

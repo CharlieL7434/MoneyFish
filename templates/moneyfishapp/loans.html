@@ -35,7 +35,10 @@
     <div>
     {% if loans %}
         <ul>
+        {<script> var num = 0</script>
         {% for loan in loans %}
+        {% if loan.user.username == user.username %}
+        <script> num = num +1</script>
             <li>{{ loan.borrower }} : {{ loan.lvalue }}</li>
 			<script>
 				var y = y + {{ loan.lvalue }}
@@ -43,12 +46,16 @@
 				document.getElementById("loans").innerHTML ="Your total loaned money is: £" + total;
 			</script>
             <br />
+        {% endif %}
         {% endfor %}
+        {% if num == 0 %}
+        <strong>No Loans</strong>
+        {% endif %}
         </ul>
     {% else %}
         <strong>No Loans</strong>
     {% endif %}
     </div>
     <br />
-    <a href="/moneyfishapp/add_loan/">Add a New Loan</a><br />
+    <a href="{% url 'moneyfishapp:add_loan' user.username %}">Add a New Loan</a><br />
 {% endblock %}

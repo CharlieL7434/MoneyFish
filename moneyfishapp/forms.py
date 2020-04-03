@@ -13,7 +13,6 @@ class LoansForm(forms.ModelForm):
 class IncomeForm(forms.ModelForm):
     insource = forms.CharField(max_length=128, help_text="Please enter your income source.")
     invalue = forms.DecimalField(max_digits=8, decimal_places=2, help_text="Please enter the income amount")
-
     class Meta:
         model = Income
         fields = ('insource', 'invalue',)

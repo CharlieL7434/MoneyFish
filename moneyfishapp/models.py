@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='profile_images', blank=True)
@@ -27,7 +28,7 @@ class Outgoing(models.Model):
     outvalue = models.DecimalField(max_digits=8, decimal_places=2, null=True)
 
     class Meta:
-        verbose_name_plural = 'Outgoing'
+        verbose_name_plural = 'Outgoings'
 
     def __str__(self):
         return self.outsource

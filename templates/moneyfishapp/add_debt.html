@@ -23,7 +23,7 @@
 {% block body_block %}
 
 <div>
-    <form id="debt_form" method="post" action="/moneyfishapp/add_debt/">
+    <form id="debt_form" method="post" action="{% url 'moneyfishapp:add_debt' user.username %}">
         {% csrf_token %}
         {% for hidden in form.hidden_fields %}
             {{ hidden }}

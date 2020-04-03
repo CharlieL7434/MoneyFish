@@ -38,30 +38,40 @@
         Money In:
         <br />
         {% if income %}
+        <script> var num = 0</script>
             <ul>
             {% for in in income %}
+            {% if in.user.username == user.username %}
+            <script> num = num +1</script>
                 <li>{{ in.insource}} : {{ in.invalue }}</li>
 				<script>
 				var x = x + {{ in.invalue }}
 				</script>
 				
                 <br />
+            {% endif %}
             {% endfor %}
+            {% if num == 0 %}
+            <strong>No Income.</strong>
+            {% endif %}
             </ul>
         {% else %}
             <strong>No Income.</strong>
         {% endif %}
     </div>
     <br />
-    <a href="/moneyfishapp/add_income/">Add a New Income</a><br />
+    <a href="{% url 'moneyfishapp:add_income' user.username %}">  Add a New Income</a><br />
     <div>
 	
 	<p id="out"></p>
         Money Out:
         <br />
         {% if outgoing %}
+        <script> num = 0</script>
             <ul>
             {% for out in outgoing %}
+            {% if out.user.username == user.username%}
+            <script> num = num +1</script>
                 <li>{{ out.outsource }} : {{ out.outvalue }}</li>
 				<script>
 				var y = y + {{ out.outvalue }}
@@ -69,7 +79,11 @@
 				document.getElementById("income").innerHTML ="Your total money is: £ " + total;
 				</script>
                 <br />
+            {% endif %}
             {% endfor %}
+            {% if num == 0 %}
+            <strong>No Οutgoing.</strong>
+            {% endif %}
             </ul>
         {% else %}
             <strong>No Outgoing.</strong>
@@ -77,6 +91,6 @@
     </div>
 	
     <br />
-    <a href="/moneyfishapp/add_outgoing/">Add New Outgoing</a><br />
+    <a href="{% url 'moneyfishapp:add_outgoing' user.username %}">Add New Outgoing</a><br />
 	
 {% endblock %}
